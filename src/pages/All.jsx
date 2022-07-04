@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Item } from '../components/Item';
+import {ALL} from '../constants';
 
 class All extends Component {
     constructor(props) {
@@ -16,7 +17,7 @@ class All extends Component {
 
         return (
             <>
-                <h1 className="title title-category">ALL</h1>
+                <h1 className="title title-category">{ALL.toUpperCase()}</h1>
                 <div className='category-container'>
                     {loading ? (
                         <h2>Loading....</h2>

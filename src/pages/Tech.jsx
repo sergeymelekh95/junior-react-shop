@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Item } from '../components/Item';
+import {TECH} from '../constants';
 
 class Tech extends Component {
     constructor(props) {
@@ -8,7 +9,7 @@ class Tech extends Component {
 
     componentDidMount() {
         const {getProducts} = this.props;
-        getProducts("tech");
+        getProducts(TECH);
     }
 
     render() {
@@ -16,7 +17,7 @@ class Tech extends Component {
 
         return (
             <>
-                <h1 className='title title-category'>TECH</h1>
+                <h1 className='title title-category'>{TECH.toUpperCase()}</h1>
                 <div className='category-container'>
                     {loading ? (
                         <h2>Loading....</h2>

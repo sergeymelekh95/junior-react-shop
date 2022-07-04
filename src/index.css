@@ -16,9 +16,7 @@ body {
     width: 100%;
 }
 
-.header {
-    /* background: rgb(193, 161, 161); */
-}
+.header {}
 
 .headerRow {
     display: flex;
