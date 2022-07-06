@@ -20,11 +20,11 @@ class Header extends Component {
 
     render() {
         const { isDropdown, currencies, currency } = this.props.state;
-        const { handleCurrency, handleDropdown } = this.props;
+        const { handleCurrency, handleDropdown, handleCategory } = this.props;
 
         return (
             <div className='headerRow'>
-                <Menu />
+                <Menu state={this.props.state} handleCategory={handleCategory} />
                 <NavLink className='nav-logo' to='/'>
                     <div className='logo-img'>
                         <img className='logo_1' src={logo_1} alt='logo' />

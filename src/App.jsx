@@ -2,11 +2,10 @@ import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { gql } from '@apollo/client';
 import { Header } from './components/Header';
-import { All } from './pages/All';
-import { Clothes } from './pages/Clothes';
-import { Tech } from './pages/Tech';
+import { Category } from './pages/Category';
 import { NotFound } from './pages/NotFound';
 import { client } from '.';
+import { ItemInfo } from './pages/ItemInfo';
 
 class App extends React.Component {
     constructor() {
@@ -18,16 +17,32 @@ class App extends React.Component {
             currencies: [],
             loading: true,
             products: [],
-            indexCurrency: null,
+            indexCurrency: 0,
+            categories: [],
+            category: 'all',
+            id: window.location.href.split('/').slice(-1).join(),
+            product: null,
+            indexMainImg: 0,
         };
 
         this.handleDropdown = this.handleDropdown.bind(this);
         this.handleCurrency = this.handleCurrency.bind(this);
         this.getProducts = this.getProducts.bind(this);
         this.getCurrencies = this.getCurrencies.bind(this);
+        this.getCategories = this.getCategories.bind(this);
+        this.handleCategory = this.handleCategory.bind(this);
+        this.getItem = this.getItem.bind(this);
+        this.updateState = this.updateState.bind(this);
+        this.changeMainImg = this.changeMainImg.bind(this);
     }
 
-    getProducts(category = 'all') {
+    changeMainImg(src) {
+        this.setState({
+            indexMainImg: this.state.product.gallery.indexOf(src),
+        });
+    }
+
+    getProducts(category) {
         client
             .query({
                 query: gql`
@@ -56,6 +71,12 @@ class App extends React.Component {
                     products: result.data.category.products,
                 })
             );
+    }
+
+    handleCategory(name) {
+        this.setState({
+            category: name,
+        });
     }
 
     getCurrencies() {
@@ -93,11 +114,89 @@ class App extends React.Component {
         this.setState({ isDropdown: !this.state.isDropdown });
     }
 
-    componentDidMount() {
-        this.getCurrencies();
+    getItem(id) {
+        this.setState({
+            loading: true,
+            id: !id ? this.state.id : id,
+        });
+
+        client
+            .query({
+                query: gql`
+                    {
+                        product(id: "jacket-canada-goosee") {
+                            id
+                            name
+                            inStock
+                            gallery
+                            description
+                            category
+                            attributes {
+                                id
+                                name
+                                type
+                                items {
+                                    displayValue
+                                    value
+                                    id
+                                }
+                            }
+                            prices {
+                                amount
+                                currency {
+                                    label
+                                    symbol
+                                }
+                            }
+                            brand
+                        }
+                    }
+                `,
+            })
+            .then((result) =>
+                this.setState({
+                    loading: false,
+                    product: result.data.product,
+                })
+            );
     }
 
-    componentDidUpdate() {}
+    getCategories() {
+        this.setState({
+            loading: true,
+        });
+
+        client
+            .query({
+                query: gql`
+                    {
+                        categories {
+                            name
+                        }
+                    }
+                `,
+            })
+            .then((result) =>
+                this.setState({
+                    loading: false,
+                    categories: result.data.categories,
+                })
+            );
+    }
+
+    updateState() {
+        this.setState({
+            product: null,
+            indexMainImg: 0,
+        });
+    }
+
+    componentDidMount() {
+        this.getCategories();
+        this.getCurrencies();
+
+        this.getProducts(this.state.category);
+    }
 
     render() {
         return (
@@ -106,6 +205,7 @@ class App extends React.Component {
                     <header className='header'>
                         <div className='content'>
                             <Header
+                                handleCategory={this.handleCategory}
                                 handleCurrency={this.handleCurrency}
                                 handleDropdown={this.handleDropdown}
                                 state={this.state}
@@ -118,27 +218,30 @@ class App extends React.Component {
                                 <Route
                                     path='/'
                                     element={
-                                        <All
+                                        <Category
+                                            getProducts={this.getProducts}
+                                            handleItem={this.handleItem}
+                                            state={this.state}
+                                        />
+                                    }
+                                ></Route>
+                                <Route
+                                    path='/:name'
+                                    element={
+                                        <Category
                                             getProducts={this.getProducts}
                                             state={this.state}
                                         />
                                     }
                                 ></Route>
                                 <Route
-                                    path='/clothes'
+                                    path='/:name/:id'
                                     element={
-                                        <Clothes
-                                            getProducts={this.getProducts}
+                                        <ItemInfo
                                             state={this.state}
-                                        />
-                                    }
-                                ></Route>
-                                <Route
-                                    path='/tech'
-                                    element={
-                                        <Tech
-                                            getProducts={this.getProducts}
-                                            state={this.state}
+                                            updateState={this.updateState}
+                                            getItem={this.getItem}
+                                            changeMainImg={this.changeMainImg}
                                         />
                                     }
                                 ></Route>

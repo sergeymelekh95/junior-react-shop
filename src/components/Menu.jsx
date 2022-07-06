@@ -1,22 +1,33 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 
-
 class Menu extends Component {
+    constructor(props) {
+        super(props);
+    }
 
     render() {
+        const { categories } = this.props.state;
+        const { handleCategory } = this.props;
+
         return (
             <nav>
                 <ul className='menu'>
-                    <li>
-                        <NavLink className='menu__link' to='/'>ALL</NavLink>
-                    </li>
-                    <li>
-                        <NavLink className='menu__link' to='/clothes'>CLOTHES</NavLink>
-                    </li>
-                    <li>
-                        <NavLink className='menu__link' to='/tech'>TECH</NavLink>
-                    </li>
+                    {categories.length ? (
+                        categories.map((category) => (
+                            <li key={category.name}>
+                                <NavLink
+                                    onClick={() => handleCategory(category.name)}
+                                    className='link menu__link'
+                                    to={'/' + category.name}
+                                >
+                                    {category.name.toUpperCase()}
+                                </NavLink>
+                            </li>
+                        ))
+                    ) : (
+                        <h1>LOADING...</h1>
+                    )}
                 </ul>
             </nav>
         );
