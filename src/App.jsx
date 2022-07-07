@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { gql } from '@apollo/client';
 import { Header } from './components/Header';
 import { Category } from './pages/Category';
@@ -124,7 +124,7 @@ class App extends React.Component {
             .query({
                 query: gql`
                     {
-                        product(id: "jacket-canada-goosee") {
+                        product(id: "${id}") {
                             id
                             name
                             inStock
@@ -194,8 +194,6 @@ class App extends React.Component {
     componentDidMount() {
         this.getCategories();
         this.getCurrencies();
-
-        this.getProducts(this.state.category);
     }
 
     render() {
@@ -218,11 +216,7 @@ class App extends React.Component {
                                 <Route
                                     path='/'
                                     element={
-                                        <Category
-                                            getProducts={this.getProducts}
-                                            handleItem={this.handleItem}
-                                            state={this.state}
-                                        />
+                                        <Navigate to="/all" />
                                     }
                                 ></Route>
                                 <Route
@@ -230,6 +224,7 @@ class App extends React.Component {
                                     element={
                                         <Category
                                             getProducts={this.getProducts}
+                                            handleItem={this.handleItem}
                                             state={this.state}
                                         />
                                     }

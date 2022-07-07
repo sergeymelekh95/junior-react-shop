@@ -8,12 +8,18 @@ class Category extends Component {
     }
 
     componentDidUpdate(prevState) {
+        console.log('update');
         const { category } = this.props.state;
         const { getProducts } = this.props;
 
         if (category !== prevState.state.category) {
             getProducts(category);
         }
+    }
+
+    componentDidMount() {
+        const { getProducts } = this.props;
+        getProducts(window.location.href.split('/').slice(-1).join());
     }
 
     render() {

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import { Attribute } from './Attribute';
 
-class Description extends Component {
+class Characteristic extends Component {
     constructor(props) {
         super(props);
     }
@@ -10,7 +11,7 @@ class Description extends Component {
         const { name, description, prices, brand, attributes } =
             this.props.product;
         // console.log(this.props);
-        // console.log(name);
+        // console.log(attributes);
 
         const regex = /(<([^>]+)>)/gi;
         const formatDescription = description.replace(regex, '');
@@ -19,22 +20,29 @@ class Description extends Component {
             <div className='characteristics'>
                 <h1 className='characteristic__name'>{name}</h1>
                 <p className='characteristic__brand'>{brand}</p>
-                <p className='characteristic__attribute_title'>{attributes[0].name.toUpperCase()}:</p>
-                <div className='size-container'>
-                    {attributes[0].items.map((size) => <div className='size'>{size.value}</div>)}
-                </div>
+                {attributes.map((attribute) => (
+                    <Attribute key={attribute.id} attribute={attribute} />
+                ))}
+
+                <p className='characteristic__attributes characteristic__attributes_price'>
+                    PRICE:
+                </p>
+                <p className='price'>
+                    <span>{prices[indexCurrency].currency.symbol}</span>
+                    {prices[indexCurrency].amount}
+                </p>
+
+                <button className='add-btn'>ADD TO CART</button>
+
                 <p
+                    className='description'
                     dangerouslySetInnerHTML={{
                         __html: formatDescription,
                     }}
                 />
-                <p>
-                    <span>{prices[indexCurrency].currency.symbol}</span>
-                    {prices[indexCurrency].amount}
-                </p>
             </div>
         );
     }
 }
 
-export { Description };
+export { Characteristic };

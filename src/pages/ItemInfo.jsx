@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Description } from '../components/Description';
+import { Characteristic } from '../components/Characteristic';
 import { GalleryImg } from '../components/GalleryImg';
 
 class ItemInfo extends Component {
@@ -20,8 +20,7 @@ class ItemInfo extends Component {
     render() {
         const { product, indexMainImg, indexCurrency } = this.props.state;
         const { changeMainImg } = this.props;
-
-        console.log(this.props.state);
+        // console.log(product, indexMainImg, indexCurrency);
 
         return (
             <div>
@@ -33,7 +32,7 @@ class ItemInfo extends Component {
                             indexMainImg={indexMainImg}
                             changeMainImg={changeMainImg}
                         />
-                        <Description
+                        <Characteristic
                             product={product}
                             indexCurrency={indexCurrency}
                         />

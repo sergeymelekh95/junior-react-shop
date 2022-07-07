@@ -243,21 +243,21 @@ body {
     font-weight: 400;
 }
 
-.characteristic__attribute_title {
+.characteristic__attributes {
     font-family: 'Roboto', sans-serif;
     font-weight: 700;
     font-size: 18px;
-    margin: 0 0 8px 0;
+    margin: 24px 0 8px 0;
 }
 
-.size-container {
+.options-container {
     display: flex;
     color: #292929;
     font-weight: 400;
     gap: 15px;
 }
 
-.size {
+.attribute__value {
     border: 1px solid #1d1f22;
     width: 63px;
     height: 45px;
@@ -265,4 +265,31 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.characteristic__attributes_price {
+    margin: 36px 0 0 0;
+}
+
+.price {
+    margin: 10px 0 20px 0;
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+.add-btn {
+    border: none;
+    width: 292px;
+    height: 52px;
+    background: #5ece7b;
+    font-weight: 600;
+    color: #fff;
+    cursor: pointer;
+}
+
+.description {
+    margin: 40px 0 0 0;
+    font-family: 'Roboto';
+    font-weight: 400;
+    color: #1D1F22;
 }
