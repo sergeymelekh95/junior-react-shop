@@ -19,10 +19,10 @@ class Description extends Component {
             <div className='characteristics'>
                 <h1 className='characteristic__name'>{name}</h1>
                 <p className='characteristic__brand'>{brand}</p>
-                {/* <p className='characteristic__attribute_title'>{attributes[0].name.toUpperCase()}:</p>
+                <p className='characteristic__attribute_title'>{attributes[0].name.toUpperCase()}:</p>
                 <div className='size-container'>
                     {attributes[0].items.map((size) => <div className='size'>{size.value}</div>)}
-                </div> */}
+                </div>
                 <p
                     dangerouslySetInnerHTML={{
                         __html: formatDescription,
