@@ -23,6 +23,8 @@ class App extends React.Component {
             id: window.location.href.split('/').slice(-1).join(),
             product: null,
             indexMainImg: 0,
+            isBasket: false,
+            basketContent: []
         };
 
         this.handleDropdown = this.handleDropdown.bind(this);
@@ -199,7 +201,14 @@ class App extends React.Component {
     render() {
         return (
             <BrowserRouter>
-                <div className='container'>
+                <div
+                    className='container'
+                    onClick={
+                        this.state.isDropdown
+                            ? () => this.handleDropdown()
+                            : null
+                    }
+                >
                     <header className='header'>
                         <div className='content'>
                             <Header
@@ -215,9 +224,7 @@ class App extends React.Component {
                             <Routes>
                                 <Route
                                     path='/'
-                                    element={
-                                        <Navigate to="/all" />
-                                    }
+                                    element={<Navigate to='/all' />}
                                 ></Route>
                                 <Route
                                     path='/:name'

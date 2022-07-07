@@ -114,6 +114,7 @@ body {
     left: -30px;
     box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
     cursor: pointer;
+    background-color: #fff;
 }
 
 .dropdown li:hover {
@@ -267,6 +268,11 @@ body {
     align-items: center;
 }
 
+.attribute__value:hover {
+    background-color: #1D1F22;
+    color: #fff;
+}
+
 .characteristic__attributes_price {
     margin: 36px 0 0 0;
 }
@@ -292,4 +298,8 @@ body {
     font-family: 'Roboto';
     font-weight: 400;
     color: #1D1F22;
+}
+
+:disabled {
+    opacity: 0.7;
 }

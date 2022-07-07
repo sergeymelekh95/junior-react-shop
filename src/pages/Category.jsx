@@ -8,7 +8,6 @@ class Category extends Component {
     }
 
     componentDidUpdate(prevState) {
-        console.log('update');
         const { category } = this.props.state;
         const { getProducts } = this.props;
 

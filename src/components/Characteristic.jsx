@@ -8,9 +8,9 @@ class Characteristic extends Component {
 
     render() {
         const { indexCurrency } = this.props;
-        const { name, description, prices, brand, attributes } =
+        const { name, description, prices, brand, attributes, inStock } =
             this.props.product;
-        // console.log(this.props);
+        // console.log(inStock);
         // console.log(attributes);
 
         const regex = /(<([^>]+)>)/gi;
@@ -32,7 +32,9 @@ class Characteristic extends Component {
                     {prices[indexCurrency].amount}
                 </p>
 
-                <button className='add-btn'>ADD TO CART</button>
+                <button disabled={!inStock} className='add-btn'>
+                    ADD TO CART
+                </button>
 
                 <p
                     className='description'
