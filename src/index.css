@@ -352,6 +352,15 @@ body {
     color: #fff;
 }
 
+.colorAttribute {
+    border: 1px solid transparent;
+    padding: 1px;
+}
+
+.colorAttribute:hover {
+    border: 1px solid #5ECE7B;
+}
+
 .colorAttribute_selected {
-    border: 2px solid black;
+    border: 1px solid #5ECE7B;
 }

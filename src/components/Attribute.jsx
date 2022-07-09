@@ -8,8 +8,7 @@ class Attribute extends Component {
     }
 
     render() {
-        const { attribute, id, setProductAttributes } = this.props;
-        console.log(this.props);
+        const { attribute, id, state, setProductAttributes } = this.props;
 
         return (
             <div>
@@ -20,20 +19,22 @@ class Attribute extends Component {
                     {attribute.name === 'Color'
                         ? attribute.items.map((item) => (
                               <AttributeColorButton
-                                  idProduct={id}
-                                  id={item.id}
+                              setProductAttributes={setProductAttributes}
+                                  attributeName={attribute.name}
+                                  state={state}
                                   value={item.value}
+                                  displayValue={item.displayValue}
                                   key={item.id}
-                                  setProductAttributes={setProductAttributes}
                               />
                           ))
                         : attribute.items.map((item) => (
                               <AttributeButton
-                                  idProduct={id}
-                                  id={item.id}
+                              setProductAttributes={setProductAttributes}
+                                  attributeName={attribute.name}
+                                  state={state}
                                   value={item.value}
+                                  displayValue={item.displayValue}
                                   key={item.id}
-                                  setProductAttributes={setProductAttributes}
                               />
                           ))}
                 </div>

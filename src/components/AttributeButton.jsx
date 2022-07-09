@@ -6,13 +6,24 @@ class AttributeButton extends Component {
     }
 
     render() {
-        const { id, value, idProduct, setProductAttributes } = this.props;
+        const {
+            value,
+            state,
+            attributeName,
+            setProductAttributes,
+            displayValue,
+        } = this.props;
 
         return (
             <button
-                id={id}
-                onClick={setProductAttributes}
-                className='attribute__value btn'
+                value={displayValue}
+                data-name={attributeName}
+                onClick={(e) => setProductAttributes(e.target.dataset.name, e.target.value)}
+                className={
+                    state[attributeName] === displayValue
+                        ? 'attribute__value btn attribute_selected'
+                        : 'attribute__value btn'
+                }
             >
                 {value}
             </button>

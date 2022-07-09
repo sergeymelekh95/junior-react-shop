@@ -6,20 +6,39 @@ class AttributeColorButton extends Component {
     }
 
     render() {
-        const { id, value, idProduct,setProductAttributes } = this.props;
+        const {
+            value,
+            attributeName,
+            state,
+            displayValue,
+            setProductAttributes,
+        } = this.props;
 
         return (
             <button
-                id={id}
-                onClick={setProductAttributes}
-                className='attribute__value btn'
+                value={displayValue}
+                data-name={attributeName}
+                onClick={(e) => {
+                    setProductAttributes(e.currentTarget.dataset.name, e.currentTarget.value);
+                }}
+                className={
+                    state[attributeName] === displayValue
+                        ? ' btn colorAttribute colorAttribute_selected'
+                        : ' btn colorAttribute'
+                }
                 style={{
-                    backgroundColor: value,
-                    border: 'none',
                     width: '32px',
                     height: '32px',
                 }}
-            ></button>
+            >
+                <div
+                    style={{
+                        backgroundColor: value,
+                        width: '100%',
+                        height: '100%',
+                    }}
+                ></div>
+            </button>
         );
     }
 }

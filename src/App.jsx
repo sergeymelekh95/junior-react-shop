@@ -25,7 +25,6 @@ class App extends React.Component {
             indexMainImg: 0,
             isBasket: false,
             basketContent: [],
-            productAttributes: null,
         };
 
         this.handleDropdown = this.handleDropdown.bind(this);
@@ -39,11 +38,6 @@ class App extends React.Component {
         this.updateState = this.updateState.bind(this);
         this.changeMainImg = this.changeMainImg.bind(this);
         this.closePopap = this.closePopap.bind(this);
-        this.setProductAttributes = this.setProductAttributes.bind(this);
-    }
-
-    setProductAttributes() {
-        console.log('setProductAttributes');
     }
 
     changeMainImg(src) {
@@ -264,7 +258,6 @@ class App extends React.Component {
                                             updateState={this.updateState}
                                             getItem={this.getItem}
                                             changeMainImg={this.changeMainImg}
-                                            setProductAttributes={this.setProductAttributes}
                                         />
                                     }
                                 ></Route>
