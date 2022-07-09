@@ -19,15 +19,17 @@ class App extends React.Component {
             products: [],
             indexCurrency: 0,
             categories: [],
-            category: 'all',
+            category: window.location.href.split('/').slice(-1).join() || 'all',
             id: window.location.href.split('/').slice(-1).join(),
             product: null,
             indexMainImg: 0,
             isBasket: false,
-            basketContent: []
+            basketContent: [],
+            productAttributes: null,
         };
 
         this.handleDropdown = this.handleDropdown.bind(this);
+        this.handleBasket = this.handleBasket.bind(this);
         this.handleCurrency = this.handleCurrency.bind(this);
         this.getProducts = this.getProducts.bind(this);
         this.getCurrencies = this.getCurrencies.bind(this);
@@ -36,6 +38,12 @@ class App extends React.Component {
         this.getItem = this.getItem.bind(this);
         this.updateState = this.updateState.bind(this);
         this.changeMainImg = this.changeMainImg.bind(this);
+        this.closePopap = this.closePopap.bind(this);
+        this.setProductAttributes = this.setProductAttributes.bind(this);
+    }
+
+    setProductAttributes() {
+        console.log('setProductAttributes');
     }
 
     changeMainImg(src) {
@@ -116,6 +124,10 @@ class App extends React.Component {
         this.setState({ isDropdown: !this.state.isDropdown });
     }
 
+    handleBasket() {
+        this.setState({ isBasket: !this.state.isBasket });
+    }
+
     getItem(id) {
         this.setState({
             loading: true,
@@ -193,6 +205,16 @@ class App extends React.Component {
         });
     }
 
+    closePopap() {
+        if (this.state.isDropdown) {
+            this.handleDropdown();
+        }
+
+        if (this.state.isBasket) {
+            this.handleBasket();
+        }
+    }
+
     componentDidMount() {
         this.getCategories();
         this.getCurrencies();
@@ -203,11 +225,7 @@ class App extends React.Component {
             <BrowserRouter>
                 <div
                     className='container'
-                    onClick={
-                        this.state.isDropdown
-                            ? () => this.handleDropdown()
-                            : null
-                    }
+                    onClick={this.closePopap}
                 >
                     <header className='header'>
                         <div className='content'>
@@ -215,11 +233,13 @@ class App extends React.Component {
                                 handleCategory={this.handleCategory}
                                 handleCurrency={this.handleCurrency}
                                 handleDropdown={this.handleDropdown}
+                                handleBasket={this.handleBasket}
                                 state={this.state}
                             />
                         </div>
                     </header>
                     <main className='main'>
+                        {this.state.isBasket ? <div className='overlay'></div> : null}
                         <div className='content'>
                             <Routes>
                                 <Route
@@ -244,6 +264,7 @@ class App extends React.Component {
                                             updateState={this.updateState}
                                             getItem={this.getItem}
                                             changeMainImg={this.changeMainImg}
+                                            setProductAttributes={this.setProductAttributes}
                                         />
                                     }
                                 ></Route>

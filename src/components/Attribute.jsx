@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { AttributeButton } from './AttributeButton';
+import { AttributeColorButton } from './AttributeColorButton';
 
 class Attribute extends Component {
     constructor(props) {
@@ -6,7 +8,8 @@ class Attribute extends Component {
     }
 
     render() {
-        const { attribute } = this.props;
+        const { attribute, id, setProductAttributes } = this.props;
+        console.log(this.props);
 
         return (
             <div>
@@ -14,24 +17,25 @@ class Attribute extends Component {
                     {attribute.name.toUpperCase()}:
                 </p>
                 <div className='options-container'>
-                    {attribute.items.map((item) =>
-                        item.value.split('')[0] === '#' ? (
-                            <div
-                                key={item.id}
-                                className='attribute__value'
-                                style={{
-                                    backgroundColor: item.value,
-                                    border: 'none',
-                                    width: '32px',
-                                    height: '32px',
-                                }}
-                            ></div>
-                        ) : (
-                            <div key={item.id} className='attribute__value'>
-                                {item.value}
-                            </div>
-                        )
-                    )}
+                    {attribute.name === 'Color'
+                        ? attribute.items.map((item) => (
+                              <AttributeColorButton
+                                  idProduct={id}
+                                  id={item.id}
+                                  value={item.value}
+                                  key={item.id}
+                                  setProductAttributes={setProductAttributes}
+                              />
+                          ))
+                        : attribute.items.map((item) => (
+                              <AttributeButton
+                                  idProduct={id}
+                                  id={item.id}
+                                  value={item.value}
+                                  key={item.id}
+                                  setProductAttributes={setProductAttributes}
+                              />
+                          ))}
                 </div>
             </div>
         );

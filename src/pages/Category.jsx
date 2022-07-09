@@ -25,7 +25,7 @@ class Category extends Component {
         const { loading, products, indexCurrency, category } = this.props.state;
 
         return (
-            <>
+            <div className='category'>
                 <h1 className='title title-category'>
                     {category.toUpperCase()}
                 </h1>
@@ -48,7 +48,7 @@ class Category extends Component {
                         ))
                     )}
                 </div>
-            </>
+            </div>
         );
     }
 }

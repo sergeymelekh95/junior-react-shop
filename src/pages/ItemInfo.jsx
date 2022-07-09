@@ -19,7 +19,7 @@ class ItemInfo extends Component {
 
     render() {
         const { product, indexMainImg, indexCurrency } = this.props.state;
-        const { changeMainImg } = this.props;
+        const { changeMainImg, setProductAttributes } = this.props;
         // console.log(product, indexMainImg, indexCurrency);
 
         return (
@@ -35,6 +35,7 @@ class ItemInfo extends Component {
                         <Characteristic
                             product={product}
                             indexCurrency={indexCurrency}
+                            setProductAttributes={setProductAttributes}
                         />
                     </div>
                 ) : (

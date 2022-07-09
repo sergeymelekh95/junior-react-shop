@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import { client } from '..';
-import { gql } from '@apollo/client';
 import { Menu } from './Menu';
 import logo_1 from '../img/logo/logo_1.svg';
 import logo_2 from '../img/logo/logo_2.svg';
@@ -12,6 +10,7 @@ import basket from '../img/basket/basket.svg';
 import wheel from '../img/basket/wheel.svg';
 import { NavLink } from 'react-router-dom';
 import { Dropdown } from './Dropdown';
+import { Basket } from './Basket';
 
 class Header extends Component {
     constructor(props) {
@@ -19,12 +18,17 @@ class Header extends Component {
     }
 
     render() {
-        const { isDropdown, currencies, currency } = this.props.state;
-        const { handleCurrency, handleDropdown, handleCategory } = this.props;
+        const { isDropdown, currencies, currency, isBasket } = this.props.state;
+        // console.log(this.props.state);
+        const { handleCurrency, handleDropdown, handleCategory, handleBasket } =
+            this.props;
 
         return (
             <div className='headerRow'>
-                <Menu state={this.props.state} handleCategory={handleCategory} />
+                <Menu
+                    state={this.props.state}
+                    handleCategory={handleCategory}
+                />
                 <NavLink className='nav-logo' to='/'>
                     <div className='logo-img'>
                         <img className='logo_1' src={logo_1} alt='logo' />
@@ -35,6 +39,7 @@ class Header extends Component {
                 </NavLink>
                 <div className='basket-block'>
                     <div>{!currency ? null : currency}</div>
+                    {isBasket ? <Basket /> : null}
                     <button
                         className='btn dropdown-btn'
                         onClick={handleDropdown}
@@ -45,11 +50,13 @@ class Header extends Component {
                             alt='currency'
                         />
                     </button>
-                    <button className='btn basket-btn'>
-                        <img className='basket' src={basket} alt='basket' />
+                    <button className='btn basket-btn' onClick={handleBasket}>
+                        <div className='countProduct'>3</div>
+                        <img className='basket-img' src={basket} alt='basket' />
                         <img className='wheel_1' src={wheel} alt='wheel' />
                         <img className='wheel_2' src={wheel} alt='wheel' />
                     </button>
+
                     {isDropdown ? (
                         <Dropdown
                             currencies={currencies}

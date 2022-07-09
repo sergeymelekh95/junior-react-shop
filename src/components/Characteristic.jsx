@@ -7,11 +7,9 @@ class Characteristic extends Component {
     }
 
     render() {
-        const { indexCurrency } = this.props;
-        const { name, description, prices, brand, attributes, inStock } =
+        const { indexCurrency, setProductAttributes } = this.props;
+        const { name, description, prices, brand, attributes, inStock, id } =
             this.props.product;
-        // console.log(inStock);
-        // console.log(attributes);
 
         const regex = /(<([^>]+)>)/gi;
         const formatDescription = description.replace(regex, '');
@@ -21,7 +19,12 @@ class Characteristic extends Component {
                 <h1 className='characteristic__name'>{name}</h1>
                 <p className='characteristic__brand'>{brand}</p>
                 {attributes.map((attribute) => (
-                    <Attribute key={attribute.id} attribute={attribute} />
+                    <Attribute
+                        key={attribute.id}
+                        id={id}
+                        attribute={attribute}
+                        setProductAttributes={setProductAttributes}
+                    />
                 ))}
 
                 <p className='characteristic__attributes characteristic__attributes_price'>
