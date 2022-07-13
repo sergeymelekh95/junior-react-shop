@@ -19,8 +19,7 @@ class ItemInfo extends Component {
 
     render() {
         const { product, indexMainImg, indexCurrency } = this.props.state;
-        const { changeMainImg } = this.props;
-        // console.log(product, indexMainImg, indexCurrency);
+        const { changeMainImg, addProductInBasket } = this.props;
 
         return (
             <div>
@@ -33,6 +32,7 @@ class ItemInfo extends Component {
                             changeMainImg={changeMainImg}
                         />
                         <Characteristic
+                            addProductInBasket={addProductInBasket}
                             product={product}
                             indexCurrency={indexCurrency}
                         />

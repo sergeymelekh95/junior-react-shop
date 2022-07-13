@@ -38,6 +38,11 @@ class App extends React.Component {
         this.updateState = this.updateState.bind(this);
         this.changeMainImg = this.changeMainImg.bind(this);
         this.closePopap = this.closePopap.bind(this);
+        this.addProductInBasket = this.addProductInBasket.bind(this);
+    }
+
+    addProductInBasket(obj) {
+        this.setState({basketContent: [...this.state.basketContent, obj]});
     }
 
     changeMainImg(src) {
@@ -254,6 +259,7 @@ class App extends React.Component {
                                     path='/:name/:id'
                                     element={
                                         <ItemInfo
+                                        addProductInBasket={this.addProductInBasket}
                                             state={this.state}
                                             updateState={this.updateState}
                                             getItem={this.getItem}

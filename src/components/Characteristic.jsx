@@ -12,7 +12,7 @@ class Characteristic extends Component {
     }
 
     setFirstState() {
-        const { id, attributes, name, brand, prices } = this.props.product;
+        const { id, attributes, name, brand, prices, gallery } = this.props.product;
         const { indexCurrency } = this.props;
 
         const state = {
@@ -22,6 +22,7 @@ class Characteristic extends Component {
             price: prices[indexCurrency].amount,
             currency: prices[indexCurrency].currency.label,
             symbol: prices[indexCurrency].currency.symbol,
+            gallery: gallery[0],
         };
 
         for (let i = 0; i < attributes.length; ++i) {
@@ -44,10 +45,10 @@ class Characteristic extends Component {
     }
 
     componentDidUpdate(prevState) {
-        const {prices} = this.props.product;
+        const { prices } = this.props.product;
 
         if (prevState.indexCurrency !== this.props.indexCurrency) {
-            this.setState({ 
+            this.setState({
                 price: prices[this.props.indexCurrency].amount,
                 currency: prices[this.props.indexCurrency].currency.label,
                 symbol: prices[this.props.indexCurrency].currency.symbol,
@@ -56,7 +57,7 @@ class Characteristic extends Component {
     }
 
     render() {
-        const { indexCurrency } = this.props;
+        const { indexCurrency, addProductInBasket } = this.props;
         const { name, description, prices, brand, attributes, inStock, id } =
             this.props.product;
 
@@ -85,7 +86,11 @@ class Characteristic extends Component {
                     {this.state.price}
                 </p>
 
-                <button disabled={!inStock} className='add-btn'>
+                <button
+                    onClick={() => addProductInBasket(this.state)}
+                    disabled={!inStock}
+                    className='add-btn'
+                >
                     ADD TO CART
                 </button>
 

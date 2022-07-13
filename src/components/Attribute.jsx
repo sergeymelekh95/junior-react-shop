@@ -19,7 +19,7 @@ class Attribute extends Component {
                     {attribute.name === 'Color'
                         ? attribute.items.map((item) => (
                               <AttributeColorButton
-                              setProductAttributes={setProductAttributes}
+                                  setProductAttributes={setProductAttributes}
                                   attributeName={attribute.name}
                                   state={state}
                                   value={item.value}
@@ -29,7 +29,7 @@ class Attribute extends Component {
                           ))
                         : attribute.items.map((item) => (
                               <AttributeButton
-                              setProductAttributes={setProductAttributes}
+                                  setProductAttributes={setProductAttributes}
                                   attributeName={attribute.name}
                                   state={state}
                                   value={item.value}

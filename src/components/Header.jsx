@@ -18,8 +18,8 @@ class Header extends Component {
     }
 
     render() {
-        const { isDropdown, currencies, currency, isBasket } = this.props.state;
-        // console.log(this.props.state);
+        const { isDropdown, currencies, currency, isBasket, basketContent } =
+            this.props.state;
         const { handleCurrency, handleDropdown, handleCategory, handleBasket } =
             this.props;
 
@@ -39,7 +39,7 @@ class Header extends Component {
                 </NavLink>
                 <div className='basket-block'>
                     <div>{!currency ? null : currency}</div>
-                    {isBasket ? <Basket /> : null}
+                    {isBasket ? <Basket basketContent={basketContent} /> : null}
                     <button
                         className='btn dropdown-btn'
                         onClick={handleDropdown}
@@ -51,7 +51,11 @@ class Header extends Component {
                         />
                     </button>
                     <button className='btn basket-btn' onClick={handleBasket}>
-                        <div className='countProduct'>3</div>
+                        {basketContent.length ? (
+                            <div className='countProduct'>
+                                {basketContent.length}
+                            </div>
+                        ) : null}
                         <img className='basket-img' src={basket} alt='basket' />
                         <img className='wheel_1' src={wheel} alt='wheel' />
                         <img className='wheel_2' src={wheel} alt='wheel' />

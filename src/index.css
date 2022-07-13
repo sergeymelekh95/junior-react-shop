@@ -336,6 +336,10 @@ body {
     cursor: pointer;
 }
 
+.add-btn:hover {
+    background-color: #61bb79;
+}
+
 .description {
     margin: 40px 0 0 0;
     font-family: 'Roboto';
@@ -363,4 +367,13 @@ body {
 
 .colorAttribute_selected {
     border: 1px solid #5ECE7B;
+}
+
+.basket__title {
+    font-weight: 700;
+    text-align: start;
+}
+
+.basket__title > span {
+    font-weight: 500;
 }
